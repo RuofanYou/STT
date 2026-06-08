@@ -1,0 +1,145 @@
+return {
+  meta = {
+    id = "stt_unit_phase_detector_runtime_phase_model",
+    plugin = "stt",
+    type = "unit",
+    title = "PhaseDetector 区分线性阶段与轮换阶段",
+  },
+  init = {
+    manualTimers = true,
+    difficultyID = 16,
+  },
+  events = {
+    {
+      type = "phase_detector_cases",
+      cases = {
+        {
+          label = "鲁拉线性阶段不生成 r1",
+          encounterID = 3183,
+          queryPhases = { "p1", "p1r1" },
+        },
+        {
+          label = "鲁拉 P3 boss2 消失后切 P4",
+          encounterID = 3183,
+          operations = {
+            { type = "set_phase", phase = "p3" },
+            { type = "advance_time", elapsed = 21 },
+            { type = "set_unit_exists", unit = "boss2", exists = false },
+            { type = "engage_unit_changed" },
+          },
+          queryPhases = { "p4", "p4r1" },
+        },
+        {
+          label = "鲁拉 P3 boss2 过早消失会延迟重试",
+          encounterID = 3183,
+          operations = {
+            { type = "set_phase", phase = "p3" },
+            { type = "advance_time", elapsed = 10 },
+            { type = "set_unit_exists", unit = "boss2", exists = false },
+            { type = "engage_unit_changed" },
+            { type = "advance_time", elapsed = 10.05 },
+            { type = "run_timers" },
+          },
+          queryPhases = { "p4", "p4r1" },
+        },
+        {
+          label = "宇宙之冕线性阶段不生成 r1",
+          encounterID = 3181,
+          operations = {
+            { type = "set_phase", phase = "i1" },
+            { type = "set_phase", phase = "p2" },
+            { type = "set_phase", phase = "i2" },
+            { type = "set_phase", phase = "p3" },
+          },
+          queryPhases = { "p3", "p3r1" },
+        },
+        {
+          label = "奇美鲁斯保留轮换阶段",
+          encounterID = 3306,
+          operations = {
+            { type = "set_phase", phase = "p2" },
+            { type = "resolve_anchor_target", anchor = { toPhase = "p1", nextRound = true } },
+            { type = "set_phase", phase = "p1r2" },
+          },
+          queryPhases = { "p1", "p1r1", "p2", "p2r1", "p1r2" },
+        },
+        {
+          label = "双龙式轮换配置保留 rN",
+          encounterID = 3178,
+          config = {
+            initialPhase = "p1",
+            phaseOrder = { "p1", "p2" },
+            anchors = {
+              p1 = { { toPhase = "p2" } },
+              p2 = { { toPhase = "p1", nextRound = true } },
+            },
+          },
+          operations = {
+            { type = "set_phase", phase = "p2" },
+            { type = "resolve_anchor_target", anchor = { toPhase = "p1", nextRound = true } },
+            { type = "set_phase", phase = "p1r2" },
+          },
+          queryPhases = { "p1", "p1r1", "p2", "p2r1", "p1r2" },
+        },
+      },
+    },
+  },
+  expect = {
+    equals = {
+      {
+        label = "鲁拉线性阶段不生成 r1",
+        initialPhase = "p1",
+        finalPhase = "p1",
+        resolvedTargets = {},
+        timerDelays = {},
+        pendingTimerCount = 0,
+        phaseStart = { p1 = true, p1r1 = true },
+      },
+      {
+        label = "鲁拉 P3 boss2 消失后切 P4",
+        initialPhase = "p1",
+        finalPhase = "p4",
+        resolvedTargets = {},
+        timerDelays = {},
+        pendingTimerCount = 0,
+        phaseStart = { p4 = true, p4r1 = true },
+      },
+      {
+        label = "鲁拉 P3 boss2 过早消失会延迟重试",
+        initialPhase = "p1",
+        finalPhase = "p4",
+        resolvedTargets = {},
+        timerDelays = { 10.05 },
+        pendingTimerCount = 0,
+        phaseStart = { p4 = true, p4r1 = true },
+      },
+      {
+        label = "宇宙之冕线性阶段不生成 r1",
+        initialPhase = "p1",
+        finalPhase = "p3",
+        resolvedTargets = {},
+        timerDelays = {},
+        pendingTimerCount = 0,
+        phaseStart = { p3 = true, p3r1 = true },
+      },
+      {
+        label = "奇美鲁斯保留轮换阶段",
+        initialPhase = "p1r1",
+        finalPhase = "p1r2",
+        resolvedTargets = { "p1r2" },
+        timerDelays = {},
+        pendingTimerCount = 0,
+        phaseStart = { p1 = true, p1r1 = true, p2 = true, p2r1 = true, p1r2 = true },
+      },
+      {
+        label = "双龙式轮换配置保留 rN",
+        initialPhase = "p1r1",
+        finalPhase = "p1r2",
+        resolvedTargets = { "p1r2" },
+        timerDelays = {},
+        pendingTimerCount = 0,
+        phaseStart = { p1 = true, p1r1 = true, p2 = true, p2r1 = true, p1r2 = true },
+      },
+    },
+  },
+}

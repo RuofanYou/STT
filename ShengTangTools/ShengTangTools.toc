@@ -1,0 +1,17 @@
+## Interface: 120000, 120001, 120005, 120007
+## IconTexture: Interface\AddOns\ShengTangTools\STTicon.png
+## Title: |cff00ff00STT - 260608.10|r
+## Title-enUS: |cff00ff00STT - 260608.10|r
+## Title-zhTW: |cff00ff00STT - 260608.10|r
+## Notes: 基于时间轴的TTS语音播报系统
+## Notes-zhCN: 基于时间轴的TTS语音播报系统
+## Notes-enUS: Timeline-driven TTS voice announcer
+## Notes-zhTW: 基於時間軸的TTS語音播報系統
+## Version: 260608.10
+## Author: 瑟瑟
+## OptionalDependencies: LibDataBroker-1.1, LibDBIcon-1.0
+## SavedVariables: STT_DB, STT_VisualBoardsDB
+## SavedVariablesPerCharacter: STT_CDB
+
+
+load.xml

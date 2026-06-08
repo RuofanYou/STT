@@ -1,0 +1,14 @@
+# macOS系统文件
+.DS_Store
+._*
+__MACOSX/
+
+# Windows系统文件  
+Thumbs.db
+
+# 压缩包
+*.zip
+
+# 备份文件
+*.bak
+*.tmp

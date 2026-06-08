@@ -1,0 +1,278 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<!-- 命名空间与冷启动 guard 必须最先加载，后续每个可选文件才能按 SavedVariables 直接返回。 -->
+	<Script file="core\init.lua"/>
+	<!-- 库文件 -->
+	<Script file="libs\LibStub\LibStub.lua"/>
+	<Script file="libs\CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Script file="libs\ChatThrottleLib\ChatThrottleLib.lua"/>
+	<Script file="libs\AceComm-3.0\AceComm-3.0.lua"/>
+	<Script file="libs\LibDataBroker-1.1\LibDataBroker-1.1.lua"/>
+	<Include file="libs\LibDBIcon-1.0\lib.xml"/>
+	<Script file="libs\LibCustomGlow-1.0\LibCustomGlow-1.0.lua"/>
+	<!-- 序列化与压缩库（用于STT战术方案分发） -->
+	<Include file="libs\LibSerialize\lib.xml"/>
+	<Include file="libs\LibDeflate\lib.xml"/>
+	<!-- 核心文件 -->
+		<Script file="core\version.lua"/>
+		<Script file="core\comm.lua"/>
+		<Script file="core\version_check_comm.lua"/>
+		<!-- 设置面板 NEW 角标系统 -->
+	<Script file="core\new_badge.lua"/>
+	<Script file="core\module_loader.lua"/>
+	<Script file="core\event_bus.lua"/>
+	<Script file="core\message_bus.lua"/>
+	<Script file="core\hook_manager.lua"/>
+	<Script file="core\lazy_assets.lua"/>
+	<Script file="core\runtime_modules.lua"/>
+	<Script file="core\perf_probe.lua"/>
+	<Script file="core\perf_log.lua"/>
+	<!-- 条件过滤（团队笔记占位符判断） -->
+	<Script file="core\condition_filter.lua"/>
+	<!-- STN 结构化模板预处理（中文分段块 + {{槽位}}） -->
+	<Script file="core\stn_template.lua"/>
+	<!-- 行内修饰器：在时间轴受众解析前剥离 {ct:N} 等修饰器 -->
+	<Script file="core\inline_modifier.lua"/>
+	<!-- 时间轴语法单一权威（SSOT） -->
+	<Script file="core\timeline_syntax.lua"/>
+	<!-- 暴雪时间轴事件安全解析（secret value 过滤） -->
+	<Script file="core\encounter_event_resolver.lua"/>
+	<!-- 触发式 STN 语法单一权威（SSOT） -->
+	<Script file="core\trigger_syntax.lua"/>
+
+	<!-- 受保护动作弹窗过滤器（默认开启，可在 /st errorfilter 切换） -->
+	<Script file="core\forbidden_filter.lua"/>
+	<!-- taint 诊断（依赖初始化后的环境） -->
+	<Script file="core\taint_debug.lua"/>
+	<!-- 友方姓名版优化（去服务器名 + 只显示名字） -->
+	<Script file="core\friendly_nameplate.lua"/>
+		<Script file="locale\zhCN.lua"/>
+	<Script file="locale\zhTW.lua"/>
+	<Script file="locale\enUS.lua"/>
+	<!-- 自动补齐文件：缺失键的占位翻译（工具脚本生成） -->
+	<Script file="locale\auto_zhCN.lua"/>
+	<Script file="locale\auto_zhTW.lua"/>
+	<Script file="locale\auto_enUS.lua"/>
+	<Script file="data\semantic_builtin_plans_s14.lua"/>
+	<Script file="data\semantic_spell_texts_s14.lua"/>
+	<Script file="data\semantic_builtin_event_plans_s14.lua"/>
+	<Script file="data\semantic_embedded_trigger_templates_s14.lua"/>
+	<Script file="data\phase_anchors_s14.lua"/>
+	<Script file="data\semantic_encounter_event_map_s14.lua"/>
+	<Script file="data\buff_check_data.lua"/>
+	<Script file="data\class_spells.lua"/>
+	<Script file="data\boss_spells.lua"/>
+	<Script file="data\personal_aura_presets.lua"/>
+	<Script file="data\spell_pinyin.lua"/>
+		<Script file="data\tooltip_concepts.lua"/>
+		<Script file="data\tooltip_payloads.lua"/>
+		<!-- 更新日志数据（单一权威，供设置页「更新日志」面板读取） -->
+		<Script file="data\changelog.lua"/>
+	<Script file="core\media.lua"/>
+	<Script file="core\core.lua"/>
+	<Script file="core\editmode.lua"/>
+	<Script file="core\ui_tooltip.lua"/>
+	<Script file="core\widget_api.lua"/>
+	<Script file="core\runtime_test_controls.lua"/>
+	<Script file="core\frame_skin.lua"/>
+	<Script file="core\bar_widget.lua"/>
+	<Script file="core\segmented_bar.lua"/>
+	<Script file="core\profile.lua"/>
+	<Script file="core\smooth_scroll.lua"/>
+	<Script file="core\keyboard_capture.lua"/>
+	<Script file="core\debug_log_gui.lua"/>
+	<Script file="core\perf_log_gui.lua"/>
+	<Script file="core\style.lua"/>
+	<!-- 屏幕提醒 V2（指示器模型）：必须在 options 注册之前加载 -->
+	<Script file="core\screen_reminder\media_presets.lua"/>
+	<Script file="core\screen_reminder\schema.lua"/>
+	<Script file="core\screen_reminder\countdown_format.lua"/>
+	<Script file="core\screen_reminder\effects.lua"/>
+	<Script file="core\screen_reminder\indicator_text.lua"/>
+	<Script file="core\screen_reminder\indicator_icon.lua"/>
+	<Script file="core\screen_reminder\indicator_bar.lua"/>
+	<Script file="core\screen_reminder\indicator_circle.lua"/>
+	<Script file="core\screen_reminder\init.lua"/>
+	<Script file="core\screen_reminder\alert.lua"/>
+	<Script file="core\screen_reminder\widgets.lua"/>
+	<Script file="core\screen_reminder\preview.lua"/>
+	<Script file="core\screen_reminder\panel_list.lua"/>
+	<Script file="core\screen_reminder\panel_config.lua"/>
+	<Script file="core\screen_reminder\options_panel.lua"/>
+	<!-- 通用战术板翻译器注册表 + 格式 adapter(纯逻辑，必须在 options 之前) -->
+	<Script file="core\tactic_translator.lua"/>
+	<Script file="core\tactic_translator_nsrt.lua"/>
+	<Script file="core\tactic_translator_tr.lua"/>
+	<Script file="core\tactic_translator_mrt.lua"/>
+	<Script file="core\tactic_exporter_tr.lua"/>
+	<!-- 声明式设置系统 -->
+	<Script file="options\option_engine.lua"/>
+	<Script file="core\option_push.lua"/>
+	<Script file="options\nav_tree.lua"/>
+	<Script file="options\search.lua"/>
+	<Script file="options\diagnose_options.lua"/>
+	<Script file="options\voice_options.lua"/>
+	<Script file="options\countdown_options.lua"/>
+	<Script file="options\bar_options.lua"/>
+	<Script file="options\blizzard_tl_options.lua"/>
+	<Script file="options\tactical_ui_options.lua"/>
+	<Script file="options\frame_skin_options.lua"/>
+	<Script file="options\screen_reminder_options.lua"/>
+	<Script file="options\auto_logging_options.lua"/>
+	<Script file="options\buff_check_options.lua"/>
+	<Script file="options\early_pull_options.lua"/>
+	<Script file="options\dread_elegy_options.lua"/>
+	<Script file="options\lura_crystal_progress_options.lua"/>
+	<Script file="options\lura_crystal_options.lua"/>
+	<Script file="options\aura_color_options.lua"/>
+	<Script file="options\personal_aura_alert_options.lua"/>
+		<Script file="options\interrupt_rotation_options.lua"/>
+	<Script file="options\realtime_board_options.lua"/>
+	<Script file="options\raid_command_panel_options.lua"/>
+	<Script file="options\roster_planner_options.lua"/>
+	<Script file="options\nameplate_options.lua"/>
+	<Script file="options\self_marker_options.lua"/>
+	<Script file="options\super_zoom_options.lua"/>
+	<Script file="options\cast_recorder_options.lua"/>
+	<Script file="options\durability_check_options.lua"/>
+	<Script file="options\private_aura_list_options.lua"/>
+	<Script file="options\private_aura_hijack_options.lua"/>
+		<Script file="options\system_options.lua"/>
+	<!-- 更新日志面板：只读富文本，挂在 系统 分类底部 -->
+	<Script file="options\changelog_options.lua"/>
+	<Script file="options\version_check_options.lua"/>
+	<Script file="options\about_options.lua"/>
+	<Script file="options\profile_dialogs.lua"/>
+	<Script file="options\profile_selector.lua"/>
+	<!-- 战术板翻译器(通用)：声明式 module + type=custom 渲染双栏 UI -->
+	<Script file="options\tactic_translator_options.lua"/>
+	<Script file="core\note.lua"/>
+	<Script file="core\note_sync.lua"/>
+	<Script file="core\semantic_runtime.lua"/>
+	<Script file="core\note_parser.lua"/>
+	<!-- 视觉画板：运行时小核常驻；编辑器重件只注册 visualBoard.editorLoaded cold loader。 -->
+	<Script file="visual_board\backgrounds.lua"/>
+	<Script file="visual_board\data.lua"/>
+	<Script file="visual_board\spec_icons.lua"/>
+	<Script file="visual_board\person_resolver.lua"/>
+	<Script file="visual_board\core.lua"/>
+	<Script file="visual_board\parser_hook.lua"/>
+	<Script file="visual_board\canvas.lua"/>
+	<Script file="visual_board\overlay.lua"/>
+	<Script file="visual_board\icon_picker.lua"/>
+	<Script file="visual_board\layer_panel.lua"/>
+	<Script file="visual_board\component_drawer.lua"/>
+	<Script file="visual_board\slide_bar.lua"/>
+	<Script file="visual_board\editor_gui.lua"/>
+	<Script file="core\note_editor.lua"/>
+	<Script file="core\simple_paste.lua"/>
+	<Script file="core\export_import.lua"/>
+	<Script file="core\phase_detector.lua"/>
+	<Script file="core\blizzard_timeline.lua"/>
+	<Script file="core\custom_audio.lua"/>
+	<Script file="core\countdown_packs.lua"/>
+	<Script file="core\countdown_player.lua"/>
+	<Script file="core\inline_sound.lua"/>
+	<Script file="core\tts_queue.lua"/>
+	<!-- 团本指挥面板：战复、嗜血与死亡事件整合视图 -->
+	<Script file="core\raid_command_panel.lua"/>
+	<Script file="core\raid_command_panel_recap.lua"/>
+	<Script file="core\raid_command_panel_gui.lua"/>
+	<!-- 阵容设置助手：源文本解析、一键邀请与替补面板 -->
+	<Script file="core\roster_planner.lua"/>
+	<Script file="core\raid_spec_reader.lua"/>
+	<Script file="core\spec_aliases.lua"/>
+	<Script file="core\sync_raid.lua"/>
+	<Script file="core\roster_planner_comm.lua"/>
+	<Script file="core\roster_planner_gui.lua"/>
+	<Script file="core\roster_planner_sub_panel.lua"/>
+	<Script file="core\util\ring_time_log.lua"/>
+	<Script file="core\util\instance_gate.lua"/>
+	<!-- 大秘境自动战斗日志 -->
+	<Script file="core\auto_logging.lua"/>
+	<Script file="core\timeline_runner.lua"/>
+	<Script file="core\trigger_runner.lua"/>
+	<Script file="core\stn_voice_adapter.lua"/>
+	<!-- 删除 12.0 不再支持的条件触发引擎 -->
+	<!-- 亡者吐息点名超大警告（私有光环检测） -->
+	<Script file="core\dread_breath_alert.lua"/>
+	<!-- 光环颜色警告：蓝/黄私有光环大屏提示（贝洛伦 1号BOSS） -->
+	<Script file="core\aura_color_alert.lua"/>
+	<!-- 自我位置标记：屏幕固定位置静态贴图，帮助玩家定位自己 -->
+	<Script file="core\self_marker.lua"/>
+	<!-- 超远视距：登录时写入最大镜头距离 CVar -->
+	<Script file="core\super_zoom.lua"/>
+	<!-- 施法记录：记录玩家自己的施法序列，战后与战术方案对照回放 -->
+	<Script file="core\cast_recorder.lua"/>
+	<Script file="core\cast_log_comm.lua"/>
+	<Script file="core\cast_replay.lua"/>
+	<Script file="core\cast_replay_gui.lua"/>
+	<!-- 个人光环列表（Beta，仅 debugMode 显示）：私密光环 DOM 探针 -->
+	<Script file="core\private_aura_list.lua"/>
+	<!-- 私密光环驱散层接管（Beta）：暴雪驱散外圈显示时叠加 STT 提示 -->
+	<Script file="core\private_aura_hijack.lua"/>
+	<!-- 个人光环提醒：ENCOUNTER_WARNING 规则与观测记录 -->
+	<Script file="core\personal_aura_alert.lua"/>
+	<Script file="core\lura_starsplinter_direction.lua"/>
+		<!-- 死亡挽歌符文顺序广播（指挥按键→团员显示） -->
+	<Script file="core\dread_elegy_channel_sync.lua"/>
+	<Script file="core\lura_crystal_alert.lua"/>
+	<Script file="core\dread_elegy.lua"/>
+	<!-- 鲁拉按钮组 MVP：验证 SecureActionButton + macrotext 不依赖 ElvUI -->
+	<Script file="core\lura_buttons_mvp.lua"/>
+	<Script file="core\tactical_notice.lua"/>
+	<Script file="core\early_pull\constants.lua"/>
+	<Script file="core\early_pull\early_pull_scanner.lua"/>
+	<Script file="core\early_pull\early_pull_blame.lua"/>
+	<Script file="core\early_pull\early_pull_announce.lua"/>
+	<Script file="core\early_pull\early_pull_claim.lua"/>
+	<Script file="core\early_pull\early_pull_details.lua"/>
+	<Script file="core\early_pull\early_pull.lua"/>
+	<Script file="core\buff_check.lua"/>
+	<Script file="core\buff_check_gui.lua"/>
+	<Script file="core\semantic_timeline.lua"/>
+	<Script file="core\semantic_template_reload.lua"/>
+	<Script file="core\interrupt_rotation\interrupt_rotation.lua"/>
+	<Script file="core\interrupt_rotation\interrupt_rotation_view.lua"/>
+	<Script file="core\interrupt_rotation\interrupt_rotation_banner.lua"/>
+	<Script file="core\interrupt_rotation\interrupt_rotation_boss_overlay.lua"/>
+	<Script file="core\interrupt_rotation\interrupt_rotation_macro.lua"/>
+	<Script file="data\encounter_handlers\midnight_falls_interrupt.lua"/>
+	<!-- 共享单元格渲染器（解析区与实时战术板共用） -->
+	<Script file="core\cell_renderer.lua"/>
+	<!-- 方案编辑器水平视角：数据层 + 静态甘特图视图 -->
+	<Script file="core\horizontal_timeline_data.lua"/>
+	<Script file="core\timeline_coords.lua"/>
+	<Script file="core\recent_skills.lua"/>
+	<Script file="core\skill_picker_logic.lua"/>
+	<Script file="core\clipboard.lua"/>
+	<Script file="core\timeline_edit.lua"/>
+	<Script file="core\selection_box.lua"/>
+	<Script file="core\timeline_personnel_row_editor.lua"/>
+	<Script file="core\timeline_context_menu.lua"/>
+	<Script file="core\timeline_event_editor.lua"/>
+	<Script file="core\skill_drawer.lua"/>
+	<Script file="core\horizontal_timeline_shortcut_hint.lua"/>
+	<Script file="core\horizontal_timeline_gui.lua"/>
+	<!-- 施法记录甘特图临时行：只读浮层叠加在水平视角轨道区顶部 -->
+	<Script file="core\cast_log_row.lua"/>
+	<!-- 方案编辑器智能替换：技能名反向字典 + 文本扫描器 + 补全菜单 -->
+	<Script file="core\spell_alias_index.lua"/>
+	<Script file="core\spell_alias_scanner.lua"/>
+	<Script file="core\spell_alias_suggestion_menu.lua"/>
+	<Script file="core\semantic_timeline_sync_button.lua"/>
+	<Script file="core\semantic_timeline_gui.lua"/>
+	<Script file="core\timeline_batch_rewrite.lua"/>
+	<Script file="core\semantic_timeline_gui_editor.lua"/>
+	<!-- 实时战术板 -->
+	<Script file="core\realtime_board.lua"/>
+	<Script file="core\realtime_board_concise.lua"/>
+	<Script file="core\realtime_board_focus.lua"/>
+	<Script file="core\realtime_board_gui.lua"/>
+	<!-- 已移除可视化时间轴（12.0 后不再维护） -->
+	<Script file="core\gui.lua"/>
+	<Script file="core\screen_reminder\edit_session.lua"/>
+	<Script file="core\export_import_gui.lua"/>
+	<Script file="core\blizzard_options.lua"/>
+	<Script file="core\minimap_button.lua"/>
+	<Script file="core\cold_file_finalizer.lua"/>
+</Ui>
